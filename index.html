@@ -6,121 +6,166 @@
         <title>Lì Xì Tết 2025</title>
         <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.0.1/dist/index.umd.js"></script>
         <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background: linear-gradient(45deg, #ff512f, #dd2476);
-            min-height: 100vh;
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+        background: linear-gradient(45deg, #ff512f, #dd2476);
+        min-height: 100vh;
+        font-family: 'Arial', sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
 
-        #fireworks {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 10;
-        }
+    #fireworks {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 10;
+    }
 
+    .greeting {
+        text-align: center;
+        color: #fff;
+        padding: 20px;
+        font-size: 24px;
+        font-weight: bold;
+        animation: fadeIn 2s;
+    }
+
+    .envelope-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        padding: 20px;
+        max-width: 900px;
+        margin: 0 20px;
+    }
+
+    .envelope {
+        position: relative;
+        width: 150px;
+        height: 200px;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+        perspective: 1000px;
+    }
+
+    .envelope:hover {
+        transform: scale(1.1);
+    }
+
+    .envelope-inner {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.6s ease-in-out;
+    }
+
+    .envelope.open .envelope-inner {
+        transform: rotateY(180deg);
+    }
+
+    .envelope-front, .envelope-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: bold;
+        backface-visibility: hidden;
+    }
+
+    .envelope-front {
+        background: linear-gradient(120deg, #ff0000, #ff6600);
+        color: gold;
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+    }
+
+    .envelope-back {
+        background: linear-gradient(120deg, #d62d20, #e74c3c);
+        color: white;
+        transform: rotateY(180deg);
+    }
+
+    .congrat-message {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        background: #f1c40f;
+        color: #c0392b;
+        padding: 20px 40px;
+        border-radius: 15px;
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        animation: congratPopup 0.5s forwards;
+        z-index: 1000;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes congratPopup {
+        from { transform: translate(-50%, -50%) scale(0); }
+        to { transform: translate(-50%, -50%) scale(1); }
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
         .greeting {
-            text-align: center;
-            color: #fff;
-            padding: 20px;
-            font-size: 24px;
-            font-weight: bold;
-            animation: fadeIn 2s;
+            font-size: 18px;
         }
 
         .envelope-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            padding: 20px;
-            max-width: 900px;
+            grid-template-columns: repeat(2, 1fr);
+            padding: 10px;
         }
 
         .envelope {
-            position: relative;
-            width: 150px;
-            height: 200px;
-            cursor: pointer;
-            transition: transform 0.3s ease-in-out;
-            perspective: 1000px;
-        }
-
-        .envelope:hover {
-            transform: scale(1.1);
-        }
-
-        .envelope-inner {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.6s ease-in-out;
-        }
-
-        .envelope.open .envelope-inner {
-            transform: rotateY(180deg);
-        }
-
-        .envelope-front, .envelope-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: bold;
-            backface-visibility: hidden;
-        }
-
-        .envelope-front {
-            background: linear-gradient(120deg, #ff0000, #ff6600);
-            color: gold;
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
-        }
-
-        .envelope-back {
-            background: linear-gradient(120deg, #d62d20, #e74c3c);
-            color: white;
-            transform: rotateY(180deg);
+            width: 120px;
+            height: 160px;
         }
 
         .congrat-message {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            background: #f1c40f;
-            color: #c0392b;
-            padding: 20px 40px;
-            border-radius: 15px;
-            font-size: 24px;
-            font-weight: bold;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            animation: congratPopup 0.5s forwards;
-            z-index: 1000;
+            font-size: 18px;
+            padding: 15px 30px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .greeting {
+            font-size: 16px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .envelope-container {
+            grid-template-columns: 1fr;
+            padding: 5px;
         }
 
-        @keyframes congratPopup {
-            from { transform: translate(-50%, -50%) scale(0); }
-            to { transform: translate(-50%, -50%) scale(1); }
+        .envelope {
+            width: 100px;
+            height: 140px;
         }
+
+        .congrat-message {
+            font-size: 16px;
+            padding: 10px 20px;
+        }
+    }
     </style>
     </head>
     <body>
@@ -134,54 +179,54 @@
         <div class="envelope-container"></div>
 
         <script>
-        const amounts = ['10k', '20k', '30k'];
-        const container = document.querySelector('.envelope-container');
-        let hasOpened = false;
+    const amounts = ['10k', '20k', '30k'];
+    const container = document.querySelector('.envelope-container');
+    let hasOpened = false;
 
-        function createEnvelope() {
-            const envelope = document.createElement('div');
-            envelope.className = 'envelope';
-            
-            const envelopeInner = document.createElement('div');
-            envelopeInner.className = 'envelope-inner';
+    function createEnvelope() {
+        const envelope = document.createElement('div');
+        envelope.className = 'envelope';
+        
+        const envelopeInner = document.createElement('div');
+        envelopeInner.className = 'envelope-inner';
 
-            const front = document.createElement('div');
-            front.className = 'envelope-front';
-            front.textContent = 'Lộc';
+        const front = document.createElement('div');
+        front.className = 'envelope-front';
+        front.textContent = 'Lộc';
 
-            const back = document.createElement('div');
-            back.className = 'envelope-back';
+        const back = document.createElement('div');
+        back.className = 'envelope-back';
 
-            envelopeInner.appendChild(front);
-            envelopeInner.appendChild(back);
-            envelope.appendChild(envelopeInner);
+        envelopeInner.appendChild(front);
+        envelopeInner.appendChild(back);
+        envelope.appendChild(envelopeInner);
 
-            return envelope;
-        }
+        return envelope;
+    }
 
-        for (let i = 0; i < 8; i++) {
-            const envelope = createEnvelope();
+    for (let i = 0; i < 8; i++) {
+        const envelope = createEnvelope();
 
-            envelope.addEventListener('click', function() {
-                if (hasOpened || this.classList.contains('disabled')) return;
+        envelope.addEventListener('click', function() {
+            if (hasOpened || this.classList.contains('disabled')) return;
 
-                hasOpened = true;
-                document.body.classList.add('disabled');
+            hasOpened = true;
+            document.body.classList.add('disabled');
 
-                const amount = amounts[Math.floor(Math.random() * amounts.length)];
-                this.querySelector('.envelope-back').textContent = amount;
-                this.classList.add('open');
+            const amount = amounts[Math.floor(Math.random() * amounts.length)];
+            this.querySelector('.envelope-back').textContent = amount;
+            this.classList.add('open');
 
-                const congrat = document.createElement('div');
-                congrat.className = 'congrat-message';
-                congrat.textContent = `🎊 Chúc mừng nhận được ${amount} 🎊`;
-                document.body.appendChild(congrat);
+            const congrat = document.createElement('div');
+            congrat.className = 'congrat-message';
+            congrat.textContent = `🎊 Chúc mừng nhận được ${amount} 🎊`;
+            document.body.appendChild(congrat);
 
-                setTimeout(() => { congrat.remove(); }, 5000);
-            });
+            setTimeout(() => { congrat.remove(); }, 5000);
+        });
 
-            container.appendChild(envelope);
-        }
+        container.appendChild(envelope);
+    }
 
     </script>
     </body>
